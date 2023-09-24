@@ -31,8 +31,11 @@ func main() {
 	if err != nil {
 		errorLog.Fatal(err)
 	}
-
-	db.Close()
+	// Lesson learned, make sure to use the defer keyword!!
+	// Spent an hour debugging while my DB wasnt being updated because
+	// db.Close() was running before the listen and serve, so it was never open to begin with
+	// USE DEFER
+	defer db.Close()
 
 	app := &application{
 		errorLog: errorLog,
