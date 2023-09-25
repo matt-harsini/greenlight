@@ -35,6 +35,7 @@ func main() {
 	// Spent an hour debugging while my DB wasnt being updated because
 	// db.Close() was running before the listen and serve, so it was never open to begin with
 	// USE DEFER
+	// defer runs after the execution of the return statement, according to stackoverflow 
 	defer db.Close()
 
 	app := &application{
